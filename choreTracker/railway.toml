@@ -1,0 +1,11 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+# Spring Boot Actuator provides a standardised health endpoint at /actuator/health.
+# It returns HTTP 200 {"status":"UP"} when the app is running.
+healthcheckPath    = "/actuator/health"
+healthcheckTimeout = 300
+restartPolicyType  = "on_failure"
+restartPolicyMaxRetries = 3

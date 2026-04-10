@@ -1,0 +1,8 @@
+.git
+backend/target
+backend/data
+node_modules
+api
+package-lock.json
+vercel.json
+README.md
