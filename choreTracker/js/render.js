@@ -28,19 +28,22 @@ function render() {
 function rSyncPanel() {
   if (typeof isSyncEnabled === 'function' && isSyncEnabled()) {
     return `
-<div style="font-weight:800;color:#43A047;font-size:14px;margin-bottom:8px">✅ Synced</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+  <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#43A047"></span>
+  <span style="font-weight:800;color:#43A047;font-size:14px">Connected</span>
+</div>
 <div style="font-size:13px;color:#666;font-weight:700;margin-bottom:6px">Family Code: <b style="color:#5C3D99;font-size:18px;letter-spacing:2px;user-select:all">${syncMeta.familyId}</b></div>
-<div style="font-size:12px;color:#AAA;font-weight:600;margin-bottom:12px">Open this app on another device, go to Parent Zone → Sync, and enter this code to join.</div>
-<button class="btn btn-gh" style="font-size:14px;font-weight:800" onclick="confirm2('Disconnect sync?',doSyncDisconnect,'Data stays on this device but won\\u0027t sync.','🔄',true)">✕ Disconnect</button>`;
+<div style="font-size:12px;color:#AAA;font-weight:600">Use this code to connect another phone or tablet.</div>`;
   }
   return `
-<div style="font-size:13px;color:#666;font-weight:700;margin-bottom:12px">Sync is starting automatically...</div>
-<div style="display:flex;gap:8px;align-items:end;margin-top:10px">
-  <div style="flex:1">
-    <div style="font-size:12px;font-weight:800;color:#AAA;margin-bottom:4px">Or join an existing family</div>
-    <input id="syncCode" class="inp inp-sm" placeholder="Enter family code" maxlength="8" />
-  </div>
-  <button class="btn btn-pu" style="font-size:14px;white-space:nowrap" onclick="doSyncJoin()">🔗 Join</button>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+  <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#FF9800"></span>
+  <span style="font-weight:800;color:#FF9800;font-size:14px">Not connected</span>
+</div>
+<div style="font-size:12px;font-weight:700;color:#AAA;margin-bottom:10px">Enter the family code from another device to sync.</div>
+<div style="display:flex;gap:8px;align-items:end">
+  <input id="syncCode" class="inp inp-sm" placeholder="Family code" maxlength="8" style="flex:1" />
+  <button class="btn btn-pu" style="font-size:14px;white-space:nowrap" onclick="doSyncJoin()">Join</button>
 </div>`;
 }
 
@@ -762,7 +765,7 @@ function rParent() {
     </div>
 
     <div class="p-card">
-      <div class="p-title">🔄 Multi-Device Sync</div>
+      <div class="p-title">🔄 Family Sync</div>
       ${rSyncPanel()}
     </div>
 
