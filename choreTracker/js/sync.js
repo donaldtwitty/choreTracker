@@ -38,35 +38,28 @@ function isSyncEnabled() {
   return !!syncMeta.familyId;
 }
 
-// ── AUTO-SYNC ON STARTUP ──────────────────────────────────────────
+// ── SYNC ON STARTUP (only if already linked) ─────────────────────
 async function initSync() {
+  if (!isSyncEnabled()) return;
   const base = getApiBase();
   try {
-    if (isSyncEnabled()) {
-      // Already linked — pull latest
-      const res = await fetch(`${base}/api/family/${syncMeta.familyId}`);
-      if (res.ok) {
-        const data = await res.json();
-        S = JSON.parse(data.stateJson);
-        syncMeta.version = data.version;
-        saveSyncMeta();
-        skipNextPush = true;
-        save();
-        render();
-      } else if (res.status === 404) {
-        // Family was deleted (DB reset) — re-create
-        await createFamily(base);
-      }
-    } else {
-      // First time — create a family automatically
-      await createFamily(base);
-      // Update the UI immediately so the Family Code is visible in Parent Zone
+    const res = await fetch(`${base}/api/family/${syncMeta.familyId}`);
+    if (res.ok) {
+      const data = await res.json();
+      S = JSON.parse(data.stateJson);
+      syncMeta.version = data.version;
+      saveSyncMeta();
+      skipNextPush = true;
+      save();
       render();
+    } else if (res.status === 404) {
+      // Family was deleted (DB reset) — clear stale link
+      syncMeta = {};
+      saveSyncMeta();
     }
     startPolling();
   } catch (err) {
     console.warn('[Sync] init failed (offline?):', err.message);
-    // App still works offline via localStorage
   }
 }
 

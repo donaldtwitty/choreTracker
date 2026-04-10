@@ -535,6 +535,16 @@ function importData(input) {
 }
 
 // ── SYNC ACTIONS ──────────────────────────────────────────────────
+async function doSyncCreate() {
+  try {
+    await createFamily(getApiBase());
+    startPolling();
+    confirm2('Family Created!', () => { render(); }, 'Share the code with your other devices.', '🌟', false);
+  } catch (e) {
+    confirm2('Error', () => {}, 'Could not create family. Check your connection.', '⚠️', false);
+  }
+}
+
 async function doSyncJoin() {
   const code = document.getElementById('syncCode')?.value?.trim();
   if (!code) { confirm2('Missing Code', () => {}, 'Enter the family code from the other device.', '⚠️', false); return; }

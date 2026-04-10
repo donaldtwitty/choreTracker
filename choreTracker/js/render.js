@@ -40,7 +40,8 @@ function rSyncPanel() {
   <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#FF9800"></span>
   <span style="font-weight:800;color:#FF9800;font-size:14px">Not connected</span>
 </div>
-<div style="font-size:12px;font-weight:700;color:#AAA;margin-bottom:10px">Enter the family code from another device to sync.</div>
+<button class="btn btn-pu" style="font-size:14px;width:100%;margin-bottom:14px" onclick="doSyncCreate()">Create Family</button>
+<div style="font-size:12px;font-weight:700;color:#AAA;margin-bottom:10px">Or join an existing family:</div>
 <div style="display:flex;gap:8px;align-items:end">
   <input id="syncCode" class="inp inp-sm" placeholder="Family code" maxlength="8" style="flex:1" />
   <button class="btn btn-pu" style="font-size:14px;white-space:nowrap" onclick="doSyncJoin()">Join</button>
