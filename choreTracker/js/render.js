@@ -33,7 +33,8 @@ function rSyncPanel() {
   <span style="font-weight:800;color:#43A047;font-size:14px">Connected</span>
 </div>
 <div style="font-size:13px;color:#666;font-weight:700;margin-bottom:6px">Family Code: <b style="color:#5C3D99;font-size:18px;letter-spacing:2px;user-select:all">${syncMeta.familyId}</b></div>
-<div style="font-size:12px;color:#AAA;font-weight:600">Use this code to connect another phone or tablet.</div>`;
+<div style="font-size:12px;color:#AAA;font-weight:600;margin-bottom:12px">Use this code to connect another phone or tablet.</div>
+<button style="background:none;border:none;color:#CCC;font-size:11px;font-weight:700;cursor:pointer;padding:4px 0;font-family:'Nunito',sans-serif" onclick="confirm2('Reset Family Sync?',doSyncDisconnect,'You can create a new family or join another one after.','\ud83d\udd04',true)">Reset sync</button>`;
   }
   return `
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
@@ -42,10 +43,8 @@ function rSyncPanel() {
 </div>
 <button class="btn btn-pu" style="font-size:14px;width:100%;margin-bottom:14px" onclick="doSyncCreate()">Create Family</button>
 <div style="font-size:12px;font-weight:700;color:#AAA;margin-bottom:10px">Or join an existing family:</div>
-<div style="display:flex;gap:8px;align-items:end">
-  <input id="syncCode" class="inp inp-sm" placeholder="Family code" maxlength="8" style="flex:1" />
-  <button class="btn btn-pu" style="font-size:14px;white-space:nowrap" onclick="doSyncJoin()">Join</button>
-</div>`;
+<input id="syncCode" class="inp" placeholder="Enter family code" maxlength="8" style="font-size:20px;letter-spacing:3px;text-align:center;margin-bottom:10px" />
+<button class="btn btn-gh" style="font-size:15px;font-weight:800" onclick="doSyncJoin()">Join Family</button>`;
 }
 
 // ══════════════════════════════════════════════════════════════════
